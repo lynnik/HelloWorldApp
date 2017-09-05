@@ -8,6 +8,7 @@ public class App {
 
   public static void main(String[] args) {
     log.info("Приложение начало работу");
+
     Message message = new Message();
     message.getMessage();
   }

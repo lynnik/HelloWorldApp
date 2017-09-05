@@ -52,7 +52,9 @@ public class Message {
   private int getCurrentTimeInHours() {
     Calendar calendar = Calendar.getInstance();
     int currentTimeInHours = calendar.get(Calendar.HOUR_OF_DAY);
+
     log.info("currentTimeInHours: " + currentTimeInHours);
+
     return currentTimeInHours;
   }
 }
