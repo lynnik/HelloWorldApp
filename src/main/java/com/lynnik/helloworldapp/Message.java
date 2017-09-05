@@ -1,6 +1,7 @@
 package com.lynnik.helloworldapp;
 
 import com.lynnik.helloworldapp.factory.*;
+import org.apache.log4j.Logger;
 
 import java.util.Calendar;
 
@@ -21,6 +22,8 @@ public class Message {
   private static final int EVENING = 19;
   private static final int NIGHT = 23;
 
+  private static final Logger log = Logger.getLogger(Message.class);
+
   public void getMessage() {
     PartFactory factory = createPart(getCurrentTimeInHours());
     Part part = factory.createPart();
@@ -28,20 +31,28 @@ public class Message {
   }
 
   private PartFactory createPart(int time) {
-    if (time >= MORNING && time < DAY)
+    if (time >= MORNING && time < DAY) {
+      log.info("Создан екземпляр: MorningPartFactory");
       return new MorningPartFactory();
-    else if (time >= DAY && time < EVENING)
+    } else if (time >= DAY && time < EVENING) {
+      log.info("Создан екземпляр: DayPartFactory");
       return new DayPartFactory();
-    else if (time >= EVENING && time < NIGHT)
+    } else if (time >= EVENING && time < NIGHT) {
+      log.info("Создан екземпляр: EveningPartFactory");
       return new EveningPartFactory();
-    else if ((time >= MIDNIGHT && time < MORNING) || (time == NIGHT))
+    } else if ((time >= MIDNIGHT && time < MORNING) || (time == NIGHT)) {
+      log.info("Создан екземпляр: NightPartFactory");
       return new NightPartFactory();
-    else
+    } else {
+      log.error("RuntimeException " + time + " - unsupported time.");
       throw new RuntimeException(time + " - unsupported time.");
+    }
   }
 
   private int getCurrentTimeInHours() {
     Calendar calendar = Calendar.getInstance();
-    return calendar.get(Calendar.HOUR_OF_DAY);
+    int currentTimeInHours = calendar.get(Calendar.HOUR_OF_DAY);
+    log.info("currentTimeInHours: " + currentTimeInHours);
+    return currentTimeInHours;
   }
 }

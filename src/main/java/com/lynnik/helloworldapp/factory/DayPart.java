@@ -6,5 +6,6 @@ public class DayPart extends PartResources implements Part {
 
   public void createMessage() {
     getMessage(Message.MESSAGE_DAY);
+    log.info("Создано сообщение: " + Message.MESSAGE_DAY);
   }
 }

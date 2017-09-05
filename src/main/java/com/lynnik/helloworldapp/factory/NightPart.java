@@ -6,5 +6,6 @@ public class NightPart extends PartResources implements Part {
 
   public void createMessage() {
     getMessage(Message.MESSAGE_NIGHT);
+    log.info("Создано сообщение: " + Message.MESSAGE_NIGHT);
   }
 }
